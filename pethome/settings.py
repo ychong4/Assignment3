@@ -48,19 +48,6 @@ INSTALLED_APPS = [
 ]
 
 
-
-# Braintree settings
-BRAINTREE_MERCHANT_ID = '2zw42znw8j24b85v' # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'k2c2jjq7q9shp2t8' # Public Key
-BRAINTREE_PRIVATE_KEY = 'd1fd723e90f583f10af069a423ef42f8' # Private key
-from braintree import Configuration, Environment
-Configuration.configure(
-Environment.Sandbox,
-BRAINTREE_MERCHANT_ID,
-BRAINTREE_PUBLIC_KEY,
-BRAINTREE_PRIVATE_KEY
-)
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
