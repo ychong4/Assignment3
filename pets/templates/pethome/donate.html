@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'pethome/base.html' %}
+{% load static %}
+{% block title %} About Us {% endblock %}
+{% block content %}
+   <head>
+      <meta charset="UTF-8">
+    <title>About PetHome</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        h1 {
+            font-weight: bold;
+        }
+        h4 {
+           font-size: 24px;
+        }
+    </style>
+   </head>
+
+<body>
+    <h1> Donation</h1>
+    <h4> Any penny you donate could save an animal's life!</h4>
+    <p> We really appreciate for any donation you make.</p>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <p><a href="//widgets.justgiving.com/Button/Redirect?p=eyJUZXh0IjoiUGV0cyIsIklkIjoiOTdhZjU0NzAtZDhjNy00MTUzLTg3ZDEtMDkzZmMwZDVmNzYxIiwiQ2hhcml0eUlkIjoxMTkzMDc4LCJTaXplIjoibCIsIlJlZmVyZW5jZSI6IlBldGhvbWUiLCJUeXBlIjoiQ2hhcml0eURvbmF0ZSJ9"><img src="//widgets.justgiving.com/Button?p=eyJUZXh0IjoiUGV0cyIsIklkIjoiOTdhZjU0NzAtZDhjNy00MTUzLTg3ZDEtMDkzZmMwZDVmNzYxIiwiQ2hhcml0eUlkIjoxMTkzMDc4LCJTaXplIjoibCIsIlJlZmVyZW5jZSI6IlBldGhvbWUiLCJUeXBlIjoiQ2hhcml0eURvbmF0ZSJ9" /></a></p>
+
+</body>
+
+<footer>
+
+    <img src="{% static 'images/PetHome_logo.png' %}" width="100" height="80"  alt="Logo">
+    <p>@2020 PetHome.com</p>
+
+
+</footer>
+{% endblock %}
+</html>

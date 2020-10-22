@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'pethome/base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Available dogs</title>
+
+    <style>
+        body {
+            text-align: center;
+        }
+        h1 {
+            font-weight: bold;
+        }
+        h4 {
+           font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row">
+        <h1 style="padding-left: 15Px">Available Dogs</h1>
+    </div>
+    <br>
+
+
+
+    <div>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr class="bg-info">
+                <th>1</th>
+                <th>Dogs</th>
+                <th>Information</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for dog in dogs %}
+                <img src=" {{ image.url }}">
+                <tr>
+                    <td><img src="{% static 'images/2/dog4.jpg' %}" width="100" height="80"  alt="Logo"></td>
+                    <td><img class="img-circle img-responsive img-center" src = "{{ dog.image.url }}" height=400px width=400px alt=""></td>
+                    <td>{{ dog.name }}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+</body>
+
+
+
+{% endblock %}
+
+</html>
