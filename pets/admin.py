@@ -12,6 +12,5 @@ class CatAdmin(admin.ModelAdmin):
     model = Cat
 
 
-
 admin.site.register(Dog, DogAdmin)
 admin.site.register(Cat, CatAdmin)

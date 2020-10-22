@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
-
+from django.urls import reverse
 import os
-
 
 def get_image_path(instance, filename):
     return os.path.join('pets/static/images', str(instance.id), filename)
@@ -48,4 +47,3 @@ class Cat(models.Model):
 
     def __str__(self):
         return self.name
-
