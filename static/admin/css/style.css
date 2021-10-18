@@ -1,0 +1,237 @@
+
+body {
+  color: rgba(20, 30, 20, 0.9);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Source Sans Pro';
+  margin: 0;
+}
+
+
+/* Header */
+
+header {
+  background: black;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+  color: white;
+  font-weight: 300;
+  padding: 0.5em;
+}
+
+header:before {
+  bottom: 1em;
+  color: black;
+  content: 'WeasySuite';
+  opacity: 0.3;
+  position: fixed;
+  right: 1em;
+}
+
+h1 {
+  font-weight: 300;
+  margin: 0;
+}
+
+
+/* Nav */
+
+nav {
+  background: orange;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+  overflow: auto;
+  padding: 0.5em 0.75em;
+}
+
+nav:empty {
+  display: none;
+}
+
+nav ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul + ul {
+  float: right;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+nav ul:first-child li:not(li:first-child):before {
+  content: '→';
+  margin-right: 0.5em;
+}
+
+nav a {
+  color: inherit;
+}
+
+nav a:not([href]) {
+  opacity: .2;
+}
+
+
+/* Main */
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+}
+
+h2, h3 {
+  font-weight: normal;
+  margin: 0.5em 0 0;
+  width: 100%
+}
+
+main a {
+  color: purple;
+}
+
+main a:visited {
+  color: green;
+}
+
+main dd {
+  margin-left: 2em;
+}
+
+
+/* Forms */
+
+label {
+  display: block;
+}
+
+form {
+  padding: 0.5em;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+}
+
+input {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+input:not([disabled]):hover,
+input:not([disabled]):focus {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.pass input[value="pass"] {
+  background: rgba(0, 255, 0, 0.9);
+}
+
+.fail input[value="fail"] {
+  background: rgba(255, 0, 0, 0.9);
+}
+
+.na input[value="na"] {
+  background: rgba(0, 0, 255, 0.9);
+}
+
+td.pass {
+  background: rgba(0, 255, 0, 0.2);
+}
+
+td.fail {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+td.na {
+  background: rgba(0, 0, 255, 0.2);
+}
+
+.highlight {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+}
+
+section {
+  padding-right: 1em;
+}
+
+main dl,
+main ul,
+main p {
+  box-sizing: border-box;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.weasy iframe {
+  border: 0;
+  height: 720px;
+  margin-left: -10px;
+  width: 720px;
+}
+
+.browser {
+  margin: 0 30px 30px 0;
+}
+
+.browser iframe {
+  border: none;
+  box-shadow: 0 0 10px 2px #aaa;
+  box-sizing: content-box;
+  height: 680px;
+  margin-top: 10px;
+  width: 680px;
+}
+
+meter {
+  height: 0.6em;
+  margin: 0.3em 0;
+  width: 50%;
+}
+
+meter[max="0"] {
+  opacity: 0.2;
+}
+
+chapter {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  position: relative;
+  width: 100%;
+}
+
+chapter meter {
+  height: 0.2em;
+  margin: 0;
+  opacity: 0.8;
+  order: -1;
+}
+
+
+/* Table of tests */
+
+table {
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th, td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.2em;
+}
+
+th[scope="rowgroup"] {
+  border-left-color: transparent;
+  border-right-color: transparent;
+  padding-top: 0.5em;
+}
+
+td {
+  font-size: 0.8em;
+}

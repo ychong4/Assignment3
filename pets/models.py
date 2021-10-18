@@ -2,48 +2,54 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
-import os
 
-def get_image_path(instance, filename):
-    return os.path.join('pets/static/images', str(instance.id), filename)
+class Category(models.Model):
+    name = models.CharField(max_length=200,
+                            db_index=True)
+    slug = models.SlugField(max_length=200,
+                            unique=True)
 
-class Dog(models.Model):
-    objects = models.Manager()
-    id = models.IntegerField(primary_key = True,blank=False, null=False, default=' ')
-    name = models.CharField(max_length=20, blank=True, null=True,default=' ')
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('pets:pet_list_by_category',
+                       args=[self.slug])
+
+
+class Pet(models.Model):
+    category = models.ForeignKey(Category, related_name='pets', on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True)
     breed = models.CharField(max_length=20, blank=True, null=True,default=' ')
     color = models.CharField(max_length=20, blank=True, null=True,default=' ')
     age = models.IntegerField(default=' ')
     gender = models.CharField(max_length=10, default='')
     size = models.CharField(max_length=15, default='')
     weight = models.CharField(max_length=15, default='')
-    adoption_fee = models.CharField(max_length=15, default='')
+    adoption_fee = models.DecimalField(max_digits=10, decimal_places=2)
+    available = models.BooleanField(default=True)
     description = models.CharField(max_length=150, default=' ')
-    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
-    author = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-    )
+    image = models.ImageField(upload_to='pets/%Y/%m/%d',
+                              blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('name',)
+        index_together = (('id', 'slug'),)
 
     def __str__(self):
         return str(self.name)
 
-class Cat(models.Model):
-    objects = models.Manager()
-    id = models.IntegerField(primary_key = True,blank=False, null=False, default=' ')
-    name = models.CharField(max_length=20, blank=True, null=True,default=' ')
-    breed = models.CharField(max_length=20, blank=True, null=True, default=' ')
-    color = models.CharField(max_length=20, blank=True, null=True, default=' ')
-    age = models.IntegerField(default=' ')
-    gender = models.CharField(max_length=10, default='')
-    size = models.CharField(max_length=15, default='')
-    weight = models.CharField(max_length=15, default='')
-    adoption_fee = models.CharField(max_length=15, default='')
-    description = models.CharField(max_length=150, default=' ')
-    author = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-    )
+    def get_absolute_url(self):
+        return reverse('pets:pet_detail',
+                       args=[self.id, self.slug])
 
-    def __str__(self):
-        return self.name
+
+

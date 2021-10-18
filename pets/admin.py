@@ -1,16 +1,22 @@
 from django.contrib import admin
+from .models import Category, Pet
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 
-from .models import Dog, Cat
-
-class DogAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'breed', 'color', 'age', 'gender', 'size', 'weight', 'adoption_fee', 'description', 'image']
-    list_filter = ['id', 'name', 'breed', 'color', 'age', 'gender', 'size', 'weight', 'adoption_fee', 'description', 'image']
-    search_fields = ['id', 'name', 'breed', 'color', 'age', 'gender', 'size', 'weight', 'adoption_fee', 'description', 'image']
-    model = Dog
-
-class CatAdmin(admin.ModelAdmin):
-    model = Cat
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
 
 
-admin.site.register(Dog, DogAdmin)
-admin.site.register(Cat, CatAdmin)
+def pet_detail(obj):
+    url = reverse('pets:pet_detail', args=[obj.id])
+    return mark_safe(f'<a href="{url}">View</a>')
+
+@admin.register(Pet)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category', 'adoption_fee', 'available',
+                     'created', 'updated', 'image', pet_detail]
+    list_filter = ['available', 'category', 'created', 'updated' ]
+    list_editable = ['adoption_fee', 'available']
+    prepopulated_fields = {'slug': ('name',)}

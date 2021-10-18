@@ -1,12 +1,40 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
-from .models import *
-from .forms import *
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from .models import Category, Pet
+from cart.forms import CartAddProductForm
+import braintree
+from pethome import settings
+from django.http import HttpResponse
 
+
+
+
+def pet_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    pets = Pet.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        pets = pets.filter(category=category)
+    return render(request,
+                  'pethome/list.html',
+                  {'category': category,
+                   'categories': categories,
+                   'pets': pets})
+
+def pet_detail(request, id, slug):
+    pet = get_object_or_404(Pet,
+                                id=id,
+                                slug=slug,
+                                available=True)
+    cart_product_form = CartAddProductForm()
+    return render(request,
+                  'pethome/detail.html',
+                  {'pet': pet,
+                   'cart_product_form': cart_product_form})
 
 def home(request):
-   return render(request, 'pethome/home.html',
+   return render(request, 'pets/pethome/home.html',
                  {'pethome': home})
 
 def about_us(request):
@@ -14,20 +42,11 @@ def about_us(request):
                   {'about_us': about_us})
 
 def donate(request):
-    return render(request, 'pethome/donate.html',
-                  {'donate': donate})
+    return render(request, 'pethome/donate.html')
 
-def cats(request):
-    cats = Cat.objects.all()
-    return render(request, 'pethome/cats_landing_page.html',
-                  {'cats': cats})
 
-def dogs(request):
-    dogs = Dog.objects.all()
-    return render(request, 'pethome/dogs_landing_page.html',
-                 {'dogs': dogs})
-
-def dog_view(request, name):
-    dogs = Dog.objects.all()
-    dog_view = get_object_or_404(Dog, name=name)
-    return render(request, 'profile')
+def pet_detail_admin(request, pet_id):
+    pet = get_object_or_404(Pet, id=pet_id)
+    return render(request,
+                  'pethome/pet_detail.html',
+                  {'pet': pet})

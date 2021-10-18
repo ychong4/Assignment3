@@ -44,6 +44,7 @@
             left: 0;
             width:100%;
             bottom: 0;
+            text-align: center;
         }
 
         /* On small screens, set height to 'auto' for sidenav and grid */
@@ -82,17 +83,15 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="word"><a href="{% url 'home' %}">Adopt a Pet</a></li>
-                <li><a href="{% url 'pethome:donate' %}">Donate</a></li>
-                <li><a href="{% url 'pethome:about_us' %}">About Us</a></li>
+                <li class="word"><a href="{% url 'pets:pet_list' %}">Adopt a Pet</a></li>
+                <li><a href="{% url 'pets:donate' %}">Get Involved</a></li>
+                <li><a href="{% url 'pets:about_us' %}">About Us</a></li>
 
             </ul>
 
 
             <ul class="nav navbar-nav navbar-right">
-                <ul class="nav navbar-nav">
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                </ul>
+
                 {% if user.is_authenticated %}
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'home' %}">Hello, {{ user.username}}</a></li>
@@ -103,13 +102,17 @@
 
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'user_profile' %}"><i class="fa fa-btn "></i>My Profile</a></li>
                             <li><a href="{% url 'password_change' %}"><i class="fa fa-btn "></i>Change Password</a></li>
                             <li><a href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>
 
                 {% else %}
-                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
                 {% endif %}
             </ul>
 
@@ -155,4 +158,13 @@
         </div>
     </div>
 </body>
+
+<footer>
+
+    <img src="{% static 'images/PetHome_logo.png' %}" width="50" height="40"  alt="Logo">
+    <p>	&#169;2020 PetHome.com</p>
+
+
+</footer>
+
 </html>

@@ -1,0 +1,60 @@
+{% extends "admin/base_site.html" %}
+{% block title %}
+  Pet {{ pet.id }} {{ block.super }}
+{% endblock %}
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="{% url "admin:index" %}">Home</a> &rsaquo;
+    <a href="{% url "admin:pets_pet_changelist" %}">Pets</a>
+    &rsaquo;
+    <a href="{% url "admin:pets_pet_change" pet.id %}">Pet {{ pet.id }}</a>
+    &rsaquo; Detail
+  </div>
+{% endblock %}
+{% block content %}
+<h1>Pet {{ pet.id }}</h1>
+<ul class="object-tools">
+  <li>
+    <a href="#" onclick="window.print();">Print</a>
+  </li>
+</ul>
+<table>
+  <tr>
+    <th>Created</th>
+    <td>{{ pet.created }}</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>{{ pet.name }}</td>
+  </tr>
+  <tr>
+    <th>Breed</th>
+    <td>{{ pet.breed }}</td>
+  </tr>
+  <tr>
+    <th>Color</th>
+  <td>{{ pet.color }}</td>
+  </tr>
+  <tr>
+    <th>Age</th>
+  <td>{{ pet.age }}</td>
+  </tr>
+  <tr>
+    <th>Gender</th>
+  <td>{{ pet.gender }}</td>
+  </tr>
+  <tr>
+    <th>Size</th>
+  <td>{{ pet.size }}</td>
+  </tr>
+  <tr>
+    <th>Weight</th>
+  <td>{{ pet.weight }}</td>
+  </tr>
+  <tr>
+    <th>Adoption</th>
+  <td> $ {{ pet.adoption_fee }}</td>
+  </tr>
+</table>
+
+{% endblock %}
